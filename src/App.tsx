@@ -1,17 +1,16 @@
-import BlogCard from "./components/BlogCard";
-import BlogTable from "./components/BlogTables";
-import Navbar from "./components/Navbar";
+import { BrowserRouter } from "react-router-dom";
+import NavBar from "./components/Navbar";
+import Pages from "./pages/Router";
 
 function App() {
+
   return (
-    <>
-      <div className="App">
-        <Navbar/>
-        <header className="App-header"></header>
-        <BlogTable />
-        <BlogCard />
-      </div>
-    </>
+    <div className="App">
+      <BrowserRouter>
+        <NavBar />
+        <Pages />
+      </BrowserRouter>
+    </div>
   );
 }
 

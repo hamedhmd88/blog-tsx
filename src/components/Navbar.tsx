@@ -1,11 +1,24 @@
-import  { useState } from 'react'
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState } from "react";
+import LoginModalComponent from "./LoginModal"
+import RegisterModalComponent from "./RegisterModal";
+import { useCookies } from "react-cookie";
+import { COOKIE_NAMES } from "../enums/public.enums";
+import { Link } from "react-router-dom";
 
-function Navbar() {
+
+export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
-
-  return (
-    <>
-         <nav className="w-full bg-purple-500 shadow">
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [cookies, , removeCookie] = useCookies([COOKIE_NAMES.ACCESS_TOKEN, COOKIE_NAMES.USER]);
+    function LogoutHandler() {
+        removeCookie(COOKIE_NAMES.ACCESS_TOKEN)
+        removeCookie(COOKIE_NAMES.USER)
+    }
+    const NAV: JSX.Element = (
+        <nav className="w-full bg-purple-500 shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -57,7 +70,7 @@ function Navbar() {
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                             <li className="text-white hover:text-indigo-200">
-                                <link to="/">Home</link>
+                                <Link to="/">Home</Link>
                             </li>
                             <li className="text-white hover:text-indigo-200">
                                 <Link to="/blogs">Blogs</Link>
@@ -69,7 +82,7 @@ function Navbar() {
                                 <Link to="/AboutMe">AboutMe</Link>
                             </li>
                         </ul>
-                        {/* {(cookies.accessToken && cookies.user) ? (
+                        {(cookies.accessToken && cookies.user) ? (
                             <div className="mt-3 space-y-2 lg:hidden md:inline-block">
                                 <a
                                     href="javascript:void(0)" onClick={() => LogoutHandler()}
@@ -81,28 +94,56 @@ function Navbar() {
                         ) : (
                             <div className="mt-3 space-y-2 lg:hidden md:inline-block">
                                 <a
-                                    href="javascript:void(0)" 
+                                    href="javascript:void(0)" onClick={() => setShowLoginModal(true)}
                                     className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
                                 >
                                     Sign in
                                 </a>
                                 <a
-                                    href="javascript:void(0)" 
+                                    href="javascript:void(0)" onClick={() => setShowRegisterModal(true)}
                                     className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
                                 >
                                     Sign up
                                 </a>
                             </div>
-                        )} */}
+                        )}
 
                     </div>
                 </div>
-
+                {(cookies.accessToken && cookies.user) ? (
+                    <div className="hidden space-x-2 md:inline-block">
+                        <a
+                            href="javascript:void(0)" onClick={() => LogoutHandler()}
+                            className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                        >
+                            Logout
+                        </a>
+                    </div>
+                ) : (
+                    <div className="hidden space-x-2 md:inline-block">
+                        <a
+                            href="javascript:void(0)" onClick={() => setShowLoginModal(true)}
+                            className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                        >
+                            Sign in
+                        </a>
+                        <a
+                            href="javascript:void(0)" onClick={() => setShowRegisterModal(true)}
+                            className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                        >
+                            Sign up
+                        </a>
+                    </div>
+                )}
 
             </div>
         </nav>
-    </>
-  )
+    )
+    return (
+        <>
+            {NAV}
+            {showLoginModal ? (<LoginModalComponent setShowLoginModal={setShowLoginModal} />) : null}
+            {showRegisterModal ? (<RegisterModalComponent setShowRegisterModal={setShowRegisterModal} />) : null}
+        </>
+    );
 }
-
-export default Navbar
