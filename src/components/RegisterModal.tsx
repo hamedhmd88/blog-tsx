@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { useApiPost } from "../functions/fetchApi";
+import { useApiPost } from "../functions/Fetchapi";
 interface IProps {
     setShowRegisterModal: Dispatch<SetStateAction<boolean>>
 }

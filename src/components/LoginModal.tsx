@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { useApiPost } from "../functions/fetchApi";
 import { useCookies } from "react-cookie";
+import { useApiPost } from "../functions/Fetchapi";
 import { COOKIE_NAMES } from "../enums/public.enums";
 
 interface IProps {

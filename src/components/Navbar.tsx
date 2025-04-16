@@ -4,8 +4,8 @@ import { useState } from "react";
 import LoginModalComponent from "./LoginModal"
 import RegisterModalComponent from "./RegisterModal";
 import { useCookies } from "react-cookie";
-import { COOKIE_NAMES } from "../enums/public.enums";
 import { Link } from "react-router-dom";
+import { COOKIE_NAMES } from "../enums/public.enums";
 
 
 export default function NavBar() {
