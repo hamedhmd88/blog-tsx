@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
+import { JSX, useState } from "react";
 import LoginModalComponent from "./LoginModal"
 import RegisterModalComponent from "./RegisterModal";
 import { useCookies } from "react-cookie";
